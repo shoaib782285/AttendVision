@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08111f">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
+  <title>AttendVision | Login</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<main class="dashboard-container login-page" style="max-width:520px; min-height:100vh; align-content:center;">
+  <section class="dashboard-card login-card">
+    <p class="eyebrow">ATTENDANCE MANAGEMENT</p>
+    <img class="login-logo" src="{{ url_for('static', filename='images/attendvision-login-logo.png') }}" alt="AttendVision">
+    <p class="muted">Sign in to manage students and attendance.</p>
+    {% if error %}<div class="alert error" role="alert">{{ error }}</div>{% endif %}
+    <form class="form-stack login-form" method="POST" action="{{ url_for('login') }}" autocomplete="on">
+      <label for="username">Username</label>
+      <input id="username" name="username" autocomplete="username" required autofocus>
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" required>
+      <button class="button" type="submit">Sign In</button>
+    </form>
+  </section>
+</main>
+</body>
+</html>

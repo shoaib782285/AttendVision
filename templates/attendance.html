@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
+  <title>AttendVision | Attendance Records</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="dashboard-header">
+  <a class="brand-lockup" href="{{ url_for('dashboard') }}">
+    <img class="brand-logo" src="{{ url_for('static', filename='images/attendvision-logo.png') }}" alt="AttendVision">
+    <span class="header-page-title">Attendance Records</span>
+  </a>
+  <nav class="header-actions" aria-label="Attendance navigation">
+    <a class="button button-secondary" href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+    <a class="button" href="{{ url_for('export_attendance_excel') }}">Download Excel Report</a>
+  </nav>
+</header>
+<main class="dashboard-container">
+  <section class="dashboard-card">
+    <p class="eyebrow">ATTENDANCE MANAGEMENT</p><h2>Attendance History</h2>
+    <p class="muted">College hours: 08:30 AM - 04:30 PM. Each student can have one entry and one exit scan per day.</p>
+    {% if records %}<div class="table-wrapper"><table><thead><tr><th>Student</th><th>Roll Number</th><th>Branch</th><th>Date</th><th>Entry Time</th><th>Exit Time</th><th>Status</th></tr></thead><tbody>
+      {% for record in records %}<tr><td>{{ record.name }}</td><td>{{ record.roll_number }}</td><td>{{ record.branch or "-" }}</td><td>{{ record.attendance_date }}</td><td>{{ record.entry_time or "-" }}</td><td>{{ record.exit_time or "Not recorded" }}</td><td>{{ record.status }}</td></tr>{% endfor %}
+    </tbody></table></div>{% else %}<p class="muted">No attendance records yet.</p>{% endif %}
+  </section>
+</main>
+<footer class="site-footer page-footer">
+  <div class="footer-line" aria-hidden="true"></div>
+  <div class="footer-content">
+    <span>Copyright © 2026 <strong>Shoaib Shaikh</strong></span>
+    <span>AttendVision · Intelligent Attendance System</span>
+  </div>
+</footer>
+</body>
+</html>
