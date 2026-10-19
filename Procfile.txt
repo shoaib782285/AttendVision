@@ -1,0 +1,1 @@
+web: gunicorn --bind 0.0.0.0:$PORT AttendVision_MySQL_app:app
